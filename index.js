@@ -1,11 +1,10 @@
 const express = require('express')
 const dbConnection = require('./config/config')
 const app = express()
-require('dotenv').config()
+const dotenv = require('dotenv'); 
+dotenv.config();
 const cors = require('cors');
 const admin = require("firebase-admin");
-
-dotenv.config();
 
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 admin.initializeApp({

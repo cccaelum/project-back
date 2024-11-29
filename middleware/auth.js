@@ -3,8 +3,11 @@ const admin = require("firebase-admin");
 const verifyToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
-  
-  if (!token) return res.status(403).send("Token required");
+
+  if (!token) {
+    req.uid = null; // Usuario anónimo
+    return next();
+  }
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(token);
@@ -12,7 +15,8 @@ const verifyToken = async (req, res, next) => {
     next();
   } catch (error) {
     console.error("Token verification failed:", error);
-    res.status(401).send("Invalid token");
+    req.uid = null; // Continua como anónimo si el token no es válido
+    next();
   }
 };
 

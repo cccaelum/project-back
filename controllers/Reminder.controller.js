@@ -3,6 +3,9 @@ const Reminder = require('../models/Reminder')
 const ReminderController = {
     async createNew (req, res) {
         try {
+            console.log("Received body:", req.body); 
+            console.log("User ID (UID):", req.uid); 
+
             const reminder = await Reminder.create({...req.body, completed: false, userId: req.uid || null}) // Asocia userId si el usuario está autenticado
             res.status(201).send(reminder)
         } catch (error) {

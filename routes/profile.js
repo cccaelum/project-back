@@ -16,16 +16,15 @@ router.get("/", verifyToken, async (req, res) => {
 
 // Crear o actualizar perfil
 router.post("/", verifyToken, async (req, res) => {
-  const { uid, name, email, age } = req.body;
+  const { uid, name, email } = req.body;
   try {
     let user = await User.findOne({ uid });
     if (!user) {
-      user = new User({ uid, name, email, age });
+      user = new User({ uid, name, email });
       await user.save();
     } else {
       user.name = name;
       user.email = email;
-      user.age = age;
       await user.save();
     }
     res.json(user);

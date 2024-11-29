@@ -8,7 +8,7 @@ const ReminderSchema = new mongoose.Schema({
     date: Date,
     url: String,
     completed: Boolean,
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
+    userId: { type: String, ref: 'User', required: false },
 }, { timestamps: true });
 
 const Reminder = mongoose.model('Reminder', ReminderSchema);

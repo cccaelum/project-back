@@ -39,7 +39,7 @@ const ReminderController = {
     },
     async updateID (req, res) {
         try {
-            const { title, description, priority, tag, date, url } = req.body;
+            const { title, description, priority, tag, date, url, completed } = req.body;
             const reminder = await Reminder.findById(req.params._id);
 
             // Verifica acceso antes de actualizar
@@ -53,6 +53,7 @@ const ReminderController = {
             reminder.tag = tag || reminder.tag;
             reminder.date = date || reminder.date;
             reminder.url = url || reminder.url;
+            reminder.completed = completed ?? reminder.completed;
 
             const updatedReminder = await reminder.save();
 
@@ -67,7 +68,6 @@ const ReminderController = {
         try {
         const reminder = await Reminder.findById(req.params._id);
 
-      // Verifica acceso antes de eliminar
       if (!reminder || (req.uid && reminder.userId && reminder.userId.toString() !== req.uid)) {
         return res.status(404).json({ message: "Reminder not found or unauthorized" });
       }
@@ -78,7 +78,6 @@ const ReminderController = {
             res.status(500).send("Error deleting reminder");
         } 
     }
-
 }
 
 module.exports = ReminderController

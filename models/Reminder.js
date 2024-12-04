@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const ReminderSchema = new mongoose.Schema({
     title: { type: String, required: true },
-    description: String,
+    description: { type: String, default: null },
     priority: {
         type: String,
         enum: ['high', 'medium', 'low'],
@@ -14,7 +14,7 @@ const ReminderSchema = new mongoose.Schema({
         required: true
     },
     date: Date,
-    url: String,
+    url: { type: String, default: null },
     completed: Boolean,
     userId: { type: String, ref: 'User', required: false },
 }, { timestamps: true });

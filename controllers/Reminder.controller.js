@@ -48,11 +48,11 @@ const ReminderController = {
                 }
 
             reminder.title = title || reminder.title;
-            reminder.description = description || reminder.description;
+            reminder.description = description !== undefined ? description : null;
             reminder.priority = priority || reminder.priority;
             reminder.tag = tag || reminder.tag;
             reminder.date = date || reminder.date;
-            reminder.url = url || reminder.url;
+            reminder.url = url !== undefined ? url : null;
             reminder.completed = completed ?? reminder.completed;
 
             const updatedReminder = await reminder.save();

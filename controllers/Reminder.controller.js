@@ -6,7 +6,7 @@ const ReminderController = {
             console.log("Received body:", req.body); 
             console.log("User ID (UID):", req.uid); 
 
-            const reminder = await Reminder.create({...req.body, completed: false, userId: req.uid || null}) // Asocia userId si el usuario está autenticado
+            const reminder = await Reminder.create({...req.body, completed: false, userId: req.uid || null}) 
             res.status(201).send(reminder)
         } catch (error) {
             console.log(error);
@@ -15,7 +15,7 @@ const ReminderController = {
     },
     async getAll (req, res) {
         try {
-            const filters = req.uid ? { userId: req.uid } : { userId: null }; // Filtra por usuario autenticado o anónimo
+            const filters = req.uid ? { userId: req.uid } : { userId: null }; 
             const reminders = await Reminder.find(filters);
             res.json(reminders);
         } catch (error) {
@@ -27,7 +27,7 @@ const ReminderController = {
         try {
             const id = req.params._id;
             const reminder = await Reminder.findById(id);
-            // Verifica acceso para usuarios o anónimo
+            
             if (!reminder || (req.uid && reminder.userId && reminder.userId.toString() !== req.uid)) {
                 return res.status(404).json({ message: "Reminder not found" });
             }
@@ -42,10 +42,8 @@ const ReminderController = {
             const { title, description, priority, tag, date, url, completed } = req.body;
             const reminder = await Reminder.findById(req.params._id);
 
-            // Verifica acceso antes de actualizar
             if (!reminder || (req.uid && reminder.userId && reminder.userId.toString() !== req.uid)) {
-            return res.status(404).json({ message: "Reminder not found or unauthorized" });
-                }
+            return res.status(404).json({ message: "Reminder not found or unauthorized" });}
 
             reminder.title = title || reminder.title;
             reminder.description = description !== undefined ? description : null;

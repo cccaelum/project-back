@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require("../models/User");
 const verifyToken = require("../middleware/auth");
 
-// Obtener datos de perfil
 router.get("/", verifyToken, async (req, res) => {
   try {
     const user = await User.findOne({ uid: req.uid });
@@ -14,7 +13,6 @@ router.get("/", verifyToken, async (req, res) => {
   }
 });
 
-// Crear o actualizar perfil
 router.post("/", verifyToken, async (req, res) => {
   const { uid, name, email, city } = req.body;
   try {

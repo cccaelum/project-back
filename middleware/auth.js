@@ -5,7 +5,7 @@ const verifyToken = async (req, res, next) => {
   const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
 
   if (!token) {
-    req.uid = null; // Usuario anónimo
+    req.uid = null; 
     return next();
   }
 
@@ -15,7 +15,7 @@ const verifyToken = async (req, res, next) => {
     next();
   } catch (error) {
     console.error("Token verification failed:", error);
-    req.uid = null; // Continua como anónimo si el token no es válido
+    req.uid = null;
     next();
   }
 };

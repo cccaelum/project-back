@@ -20,13 +20,9 @@ const routes = require('./routes/reminders');
 
 dbConnection()
 
-// Importar las rutas
-const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
 
-// Usar las rutas
 app.use('/', routes);
-app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 
 app.listen(PORT, () => {

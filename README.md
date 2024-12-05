@@ -1,6 +1,6 @@
 # REMIND ME (back-end)
 
-Esta API es el backend de la app Reminde Me donde guardaremos en la BBDD los usuarios registrados y logados con Firebase y los recordatorios ligados a estos users. También se guardan recordatorios no ligados a un usuario, ya que la app funciona además en modo anónimo.
+Esta API es el backend de la app [Remind Me](https://remindmereminders.netlify.app/) donde guardaremos en la BBDD los usuarios registrados y logados con Firebase y los recordatorios ligados a estos users. También se guardan recordatorios no ligados a un usuario, ya que la app funciona además en modo anónimo.
 
 Para inicializar el proyecto tenemos que instalar todas las dependencias con `npm i` y después inicializaremos el servidor con `npm start`
 
